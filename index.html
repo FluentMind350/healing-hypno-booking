@@ -41,19 +41,20 @@
     }
     .site-logo {
       font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-dark);
       text-decoration: none;
       letter-spacing: 0.04em;
     }
-    .site-logo span {
-      display: block;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--text-mid);
-      letter-spacing: 0.05em;
+    .site-logo .logo-amp {
+      color: var(--orange);
+      font-style: italic;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0;
     }
     .header-nav a {
       font-size: 13px;
@@ -64,6 +65,20 @@
     }
     .header-nav a:hover { color: var(--orange); }
     .header-nav a.active { color: var(--orange); }
+    .nav-cta-btn {
+      display: inline-block;
+      margin-left: 28px;
+      background: var(--orange);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      transition: background 0.2s;
+      border-radius: 2px;
+    }
+    .nav-cta-btn:hover { background: var(--orange-dark); }
 
     .hero {
       background: var(--green-dark);
@@ -255,12 +270,16 @@
       border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .site-header { padding: 16px 20px; }
       .header-nav { display: none; }
+      .nav-cta-btn { font-size: 12px; padding: 9px 14px; margin-left: 12px; }
       .step-card { flex-direction: column; gap: 20px; padding: 28px 24px; }
       .step-card:not(:last-child)::after { left: 38px; }
       .hero { padding: 48px 20px 40px; }
+    }
+    @media (max-width: 400px) {
+      .nav-cta-btn { display: none; }
     }
   </style>
 </head>
@@ -268,15 +287,15 @@
 
 <header class="site-header">
   <a href="https://www.healinghypno-online.info" class="site-logo">
-    Healing Hypno Online
-    <span>ヒプノセラピーカウンセリング</span>
+    Healing <span class="logo-amp">&amp;</span> Hypnotherapy
   </a>
   <nav class="header-nav">
-    <a href="https://www.healinghypno-online.info">ホーム</a>
+    <a href="https://www.healinghypno-online.info/#about">セラピーとは</a>
     <a href="https://www.healinghypno-online.info/#services">サービス</a>
+    <a href="https://www.healinghypno-online.info/#profile">セラピスト</a>
     <a href="https://fluentmind350.github.io/healing-hypno-booking/" class="active">ご予約の流れ</a>
-    <a href="https://www.healinghypno-online.info/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87" style="color:var(--orange)">初回相談を予約</a>
   </nav>
+  <a href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87" class="nav-cta-btn" target="_blank">初回相談を予約</a>
 </header>
 
 <section class="hero">
@@ -337,7 +356,7 @@
         セラピストとの相性をご確認いただき、今後の進め方についてご説明します。<br>
         オンライン（Zoom）にて実施します。
       </p>
-      <a class="cta-btn" href="https://www.healinghypno-online.info/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87">
+      <a class="cta-btn" href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         初回相談を予約する
       </a>
@@ -390,7 +409,7 @@
 <section class="cta-section">
   <h2>初回相談を予約する</h2>
   <p>まずは¥3,000の初回面談からご予約ください。<br>Start with a ¥3,000 initial consultation — online via Zoom.</p>
-  <a class="cta-btn" href="https://www.healinghypno-online.info/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87">
+  <a class="cta-btn" href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     予約する / Book Now
   </a>
