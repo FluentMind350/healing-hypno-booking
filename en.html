@@ -8,56 +8,270 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#1e2a20;--deep:#3d7a52;--warm:#5a8a6a;--sage:#7db88a;--sage-lt:#b2d4bc;--orange:#e8874a;--orange-lt:#f2a672;--orange-dk:#c96e30;--cream:#faf8f3;--mist:#eef5f0;--dew:#deeee5;--white:#ffffff;--radius:6px;--serif-jp:'Noto Serif JP',serif;--sans-jp:'Noto Sans JP',sans-serif;--serif-en:'Cormorant Garamond',serif}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-    body{font-family:var(--sans-jp);background:var(--cream);color:var(--ink);font-weight:300;font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,243,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(232,135,74,.15)}
-    .nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav-logo{font-family:var(--serif-en);font-size:1.1rem;letter-spacing:.05em;color:var(--deep)}.nav-logo span{color:var(--orange)}
-    .nav-links{display:flex;gap:28px;list-style:none;align-items:center}.nav-links a{font-size:.85rem;letter-spacing:.05em;color:var(--warm);transition:color .2s}.nav-links a:hover{color:var(--orange)}.nav-links a.active{color:var(--orange)}
-    .nav-lang{font-size:.8rem;letter-spacing:.06em;display:flex;align-items:center;gap:6px}.nav-lang a{color:var(--warm);transition:color .2s}.nav-lang a:hover{color:var(--orange)}.nav-lang .active-lang{color:var(--orange);font-weight:500}.nav-lang .sep{color:var(--sage-lt)}
-    .btn{display:inline-block;padding:12px 28px;font-family:var(--sans-jp);font-size:.85rem;font-weight:400;letter-spacing:.08em;border:1px solid currentColor;border-radius:var(--radius);transition:background .25s,color .25s,border-color .25s;cursor:pointer}
-    .btn--primary{background:var(--orange);color:var(--white);border-color:var(--orange)}.btn--primary:hover{background:var(--orange-lt);border-color:var(--orange-lt)}
-    .btn--outline-light{background:transparent;color:var(--white);border-color:rgba(255,255,255,.5)}.btn--outline-light:hover{background:rgba(255,255,255,.15)}
-    @media(max-width:640px){.nav-links{display:none}}
-    .hero{min-height:44vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:64px;text-align:center}
-    .hero-bg{position:absolute;inset:0;background-image:linear-gradient(160deg,#cfe6c8 0%,#a8d4a0 25%,#e8c98a 60%,#f2b878 100%);background-size:cover;filter:brightness(.9) saturate(1.15)}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(150deg,rgba(45,90,61,.3) 0%,rgba(232,135,74,.1) 70%,rgba(30,42,32,.1) 100%)}
-    .hero-content{position:relative;z-index:1;padding:72px 24px 64px}
-    .hero-en{font-family:var(--serif-en);font-style:italic;font-size:clamp(1rem,2vw,1.3rem);color:var(--orange-lt);margin-bottom:18px;letter-spacing:.06em}
-    .hero h1{font-family:var(--serif-en);font-weight:300;font-style:italic;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--white);letter-spacing:.04em;line-height:1.2;margin-bottom:20px;text-shadow:0 2px 16px rgba(20,30,22,.3)}
-    .hero-sub{font-size:.95rem;color:rgba(250,248,243,.85);max-width:500px;margin:0 auto;line-height:2}
-    .intro{text-align:center;padding:64px 24px 16px;max-width:640px;margin:0 auto}.intro p{font-size:.95rem;color:var(--warm);line-height:2}
-    .steps-section{padding:48px 24px 88px;max-width:820px;margin:0 auto}
-    .step-card{display:flex;gap:36px;align-items:flex-start;margin-bottom:48px;background:var(--white);border-radius:var(--radius);box-shadow:0 2px 20px rgba(30,42,32,.06);padding:40px 44px;position:relative;border-bottom:3px solid transparent;transition:border-color .25s,box-shadow .25s,transform .25s}
-    .step-card:hover{border-bottom-color:var(--orange);box-shadow:0 6px 28px rgba(232,135,74,.1);transform:translateY(-2px)}
-    .step-card:not(:last-child)::after{content:'';position:absolute;bottom:-48px;left:66px;width:2px;height:48px;background:rgba(30,42,32,.1)}
-    .step-number{flex-shrink:0;font-family:var(--serif-en);font-size:2.5rem;color:var(--orange-lt);line-height:1;padding-top:4px;min-width:52px}
-    .step-body{flex:1}.step-label{font-family:var(--serif-en);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
-    .step-title{font-family:var(--serif-en);font-size:1.35rem;font-weight:400;letter-spacing:.02em;color:var(--deep);margin-bottom:14px}
-    .step-desc{font-size:.9rem;color:var(--warm);line-height:1.95;margin-bottom:20px}
-    .pdf-links{display:flex;flex-wrap:wrap;gap:10px}.pdf-link{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border:1px solid var(--deep);color:var(--deep);font-size:.82rem;transition:all 0.2s;border-radius:var(--radius)}.pdf-link:hover{background:var(--deep);color:var(--white)}.pdf-link svg{width:14px;height:14px;flex-shrink:0}
-    .price-badge{display:inline-block;font-family:var(--serif-en);font-size:1.15rem;color:var(--orange-lt);margin-bottom:16px}
-    .cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:var(--white);font-size:.88rem;font-weight:400;padding:13px 32px;transition:background 0.25s;border-radius:var(--radius);letter-spacing:.06em}.cta-btn:hover{background:var(--orange-lt)}
-    .note-box{background:var(--mist);border:1px solid var(--dew);border-left:3px solid var(--sage);padding:18px 22px;margin-top:16px;font-size:.85rem;color:var(--warm);line-height:1.85;border-radius:0 var(--radius) var(--radius) 0}
-    .cta-section{position:relative;overflow:hidden;text-align:center;padding:108px 24px;color:var(--white)}
-    .cta-bg{position:absolute;inset:0;background-image:linear-gradient(135deg,#b8dcc4 0%,#d8e8b8 50%,#f0d49a 100%);background-size:cover;filter:brightness(.82) saturate(1.1)}
-    .cta-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(45,90,61,.2),rgba(30,42,32,.4))}
-    .cta-content{position:relative;z-index:1}.cta-label{font-family:var(--serif-en);font-style:italic;font-size:1.1rem;letter-spacing:.06em;color:var(--orange-lt);margin-bottom:16px;display:block}
-    .cta-section h2{font-family:var(--serif-en);font-weight:300;font-style:italic;font-size:clamp(1.7rem,3.5vw,2.4rem);color:var(--white);margin-bottom:12px}
-    .cta-price-note{font-family:var(--serif-en);font-size:1.15rem;color:var(--orange-lt);margin-bottom:12px;display:block}
-    .cta-section p{font-size:.9rem;color:rgba(250,248,243,.78);margin-bottom:36px;line-height:1.9;max-width:440px;margin-left:auto;margin-right:auto}
-    footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:48px 24px;text-align:center}
-    .footer-logo{font-family:var(--serif-en);font-size:1.15rem;color:rgba(178,212,188,.45);margin-bottom:8px}.footer-logo span{color:rgba(242,166,114,.6)}
-    .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;list-style:none;margin:20px 0}.footer-links a{font-size:.82rem;color:rgba(178,212,188,.4);transition:color .2s}.footer-links a:hover{color:var(--orange-lt)}.footer-copy{font-size:.78rem;color:rgba(178,212,188,.2)}
-    @media(max-width:700px){.step-card{flex-direction:column;gap:20px;padding:28px 24px}.step-card:not(:last-child)::after{left:38px}.step-number{font-size:2rem}}
+    :root {
+      --ink:       #1e2a20;
+      --deep:      #3d7a52;
+      --warm:      #5a8a6a;
+      --sage:      #7db88a;
+      --sage-lt:   #b2d4bc;
+      --orange:    #e8874a;
+      --orange-lt: #f2a672;
+      --orange-dk: #c96e30;
+      --cream:     #faf8f3;
+      --mist:      #eef5f0;
+      --dew:       #deeee5;
+      --white:     #ffffff;
+      --radius:    6px;
+      --serif-jp:  'Noto Serif JP', serif;
+      --sans-jp:   'Noto Sans JP', sans-serif;
+      --serif-en:  'Cormorant Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans-jp);
+      background: var(--cream);
+      color: var(--ink);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.85;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,243,.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(232,135,74,.15);
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--serif-en); font-size: 1.1rem;
+      letter-spacing: .05em; color: var(--deep);
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { font-size: .85rem; letter-spacing: .05em; color: var(--warm); transition: color .2s; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links a.active { color: var(--orange); }
+    .nav-lang {
+      font-size: .8rem; letter-spacing: .06em;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-lang a { color: var(--warm); transition: color .2s; }
+    .nav-lang a:hover { color: var(--orange); }
+    .nav-lang .active-lang { color: var(--orange); font-weight: 500; }
+    .nav-lang .sep { color: var(--sage-lt); }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      font-family: var(--sans-jp);
+      font-size: .85rem; font-weight: 400;
+      letter-spacing: .08em;
+      border: 1px solid currentColor;
+      border-radius: var(--radius);
+      transition: background .25s, color .25s, border-color .25s;
+      cursor: pointer;
+    }
+    .btn--primary { background: var(--orange); color: var(--white); border-color: var(--orange); }
+    .btn--primary:hover { background: var(--orange-lt); border-color: var(--orange-lt); }
+    .btn--outline-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,.5); }
+    .btn--outline-light:hover { background: rgba(255,255,255,.15); }
+
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 44vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding-top: 64px; text-align: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(160deg, #cfe6c8 0%, #a8d4a0 25%, #e8c98a 60%, #f2b878 100%);
+      background-size: cover;
+      filter: brightness(.9) saturate(1.15);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, rgba(45,90,61,.3) 0%, rgba(232,135,74,.1) 70%, rgba(30,42,32,.1) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 72px 24px 64px; }
+    .hero-en {
+      font-family: var(--serif-en); font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--orange-lt); margin-bottom: 18px; letter-spacing: .06em;
+    }
+    .hero h1 {
+      font-family: var(--serif-en); font-weight: 300; font-style: italic;
+      font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--white);
+      letter-spacing: .04em; line-height: 1.2; margin-bottom: 20px;
+      text-shadow: 0 2px 16px rgba(20,30,22,.3);
+    }
+    .hero-sub {
+      font-size: .95rem; color: rgba(250,248,243,.85);
+      max-width: 500px; margin: 0 auto; line-height: 2;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      text-align: center; padding: 64px 24px 16px;
+      max-width: 640px; margin: 0 auto;
+    }
+    .intro p { font-size: .95rem; color: var(--warm); line-height: 2; }
+
+    /* ── STEPS ── */
+    .steps-section {
+      padding: 48px 24px 88px;
+      max-width: 820px; margin: 0 auto;
+    }
+
+    .step-card {
+      display: flex; gap: 36px; align-items: flex-start;
+      margin-bottom: 48px;
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: 0 2px 20px rgba(30,42,32,.06);
+      padding: 40px 44px; position: relative;
+      border-bottom: 3px solid transparent;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+    }
+    .step-card:hover {
+      border-bottom-color: var(--orange);
+      box-shadow: 0 6px 28px rgba(232,135,74,.1);
+      transform: translateY(-2px);
+    }
+    .step-card:not(:last-child)::after {
+      content: ''; position: absolute;
+      bottom: -48px; left: 66px;
+      width: 2px; height: 48px;
+      background: rgba(30,42,32,.1);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      font-family: var(--serif-en); font-size: 2.5rem;
+      color: var(--orange-lt); line-height: 1; padding-top: 4px; min-width: 52px;
+    }
+    .step-body { flex: 1; }
+    .step-label {
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 8px;
+    }
+    .step-title {
+      font-family: var(--serif-en); font-size: 1.35rem; font-weight: 400;
+      letter-spacing: .02em; color: var(--deep); margin-bottom: 14px;
+    }
+    .step-desc {
+      font-size: .9rem; color: var(--warm);
+      line-height: 1.95; margin-bottom: 20px;
+    }
+
+    /* PDF Links */
+    .pdf-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pdf-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border: 1px solid var(--deep); color: var(--deep);
+      font-size: .82rem; transition: all 0.2s; border-radius: var(--radius);
+    }
+    .pdf-link:hover { background: var(--deep); color: var(--white); }
+    .pdf-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    .price-badge {
+      display: inline-block; font-family: var(--serif-en);
+      font-size: 1.15rem; color: var(--orange-lt); margin-bottom: 16px;
+    }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--orange); color: var(--white);
+      font-size: .88rem; font-weight: 400;
+      padding: 13px 32px; transition: background 0.25s;
+      border-radius: var(--radius); letter-spacing: .06em;
+    }
+    .cta-btn:hover { background: var(--orange-lt); }
+
+    .note-box {
+      background: var(--mist); border: 1px solid var(--dew);
+      border-left: 3px solid var(--sage);
+      padding: 18px 22px; margin-top: 16px;
+      font-size: .85rem; color: var(--warm); line-height: 1.85;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      position: relative; overflow: hidden;
+      text-align: center; padding: 108px 24px; color: var(--white);
+    }
+    .cta-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(135deg, #b8dcc4 0%, #d8e8b8 50%, #f0d49a 100%);
+      background-size: cover; filter: brightness(.82) saturate(1.1);
+    }
+    .cta-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(45,90,61,.2), rgba(30,42,32,.4));
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-label {
+      font-family: var(--serif-en); font-style: italic;
+      font-size: 1.1rem; letter-spacing: .06em;
+      color: var(--orange-lt); margin-bottom: 16px; display: block;
+    }
+    .cta-section h2 {
+      font-family: var(--serif-en); font-weight: 300; font-style: italic;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      color: var(--white); margin-bottom: 12px;
+    }
+    .cta-price-note {
+      font-family: var(--serif-en); font-size: 1.15rem;
+      color: var(--orange-lt); margin-bottom: 12px; display: block;
+    }
+    .cta-section p {
+      font-size: .9rem; color: rgba(250,248,243,.78);
+      margin-bottom: 36px; line-height: 1.9;
+      max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 48px 24px; text-align: center;
+    }
+    .footer-logo { font-family: var(--serif-en); font-size: 1.15rem; color: rgba(178,212,188,.45); margin-bottom: 8px; }
+    .footer-logo span { color: rgba(242,166,114,.6); }
+    .footer-links {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+      list-style: none; margin: 20px 0;
+    }
+    .footer-links a { font-size: .82rem; color: rgba(178,212,188,.4); transition: color .2s; }
+    .footer-links a:hover { color: var(--orange-lt); }
+    .footer-copy { font-size: .78rem; color: rgba(178,212,188,.2); }
+
+    @media (max-width: 700px) {
+      .step-card { flex-direction: column; gap: 20px; padding: 28px 24px; }
+      .step-card:not(:last-child)::after { left: 38px; }
+      .step-number { font-size: 2rem; }
+    }
   </style>
 </head>
 <body>
+
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="https://www.healinghypno-online.info/en/" class="nav-logo">Healing <span>&amp;</span> Hypnotherapy</a>
+    <a href="https://www.healinghypno-online.info/en/" class="nav-logo">Healing <span>&</span> Hypnotherapy</a>
     <ul class="nav-links">
       <li><a href="https://www.healinghypno-online.info/en/#about">What is Therapy</a></li>
       <li><a href="https://www.healinghypno-online.info/en/#services">Services</a></li>
@@ -69,86 +283,166 @@
         <span class="active-lang">EN</span>
       </li>
     </ul>
-    <a href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87" class="btn btn--primary" target="_blank">Book a Consultation</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7ksZSYjFXfZsTuzKey1ICZi8XS70Y63VBq0-anXYmDNOoTw/viewform" class="btn btn--primary" target="_blank">Request a Session</a>
   </div>
 </nav>
+
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div><div class="hero-overlay"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-en">Booking Guide</p>
     <h1>How to Book</h1>
     <p class="hero-sub">Your step-by-step guide from booking to your first session.<br>We're here to make the process as easy as possible.</p>
   </div>
 </section>
+
+<!-- INTRO -->
 <div class="intro">
-  <p>If this is your first visit, please start by reading through our Terms of Use and Consent Form.<br>Then book your initial consultation (<strong>&yen;3,000</strong> / approx. 30 min via Zoom)<br>and complete the intake form before your session.</p>
+  <p>
+    If this is your first visit, please start by reading through our Terms of Use and Consent Form.<br>
+    Then submit your preferred session times via the form below,<br>
+    and your therapist will confirm the schedule by email.<br>
+    <em style="font-size:.88rem; color:rgba(90,138,106,.7)">※ Sessions are currently available approx. twice a week.</em>
+  </p>
 </div>
+
+<!-- STEPS -->
 <div class="steps-section">
+
+  <!-- STEP 1 -->
   <div class="step-card">
     <div class="step-number">01</div>
     <div class="step-body">
       <div class="step-label">Step One</div>
-      <div class="step-title">Review Terms &amp; Consent Form</div>
-      <p class="step-desc">Before your session, please read through the Terms of Use and Consent Form.<br>Once you have reviewed and agreed to the terms, you can proceed to the next step.<br>Both Japanese and English versions are available.</p>
+      <div class="step-title">Review Terms & Consent Form</div>
+      <p class="step-desc">
+        Before your session, please read through the Terms of Use and Consent Form.<br>
+        Once you have reviewed and agreed to the terms, you can proceed to the next step.<br>
+        Both Japanese and English versions are available.
+      </p>
       <div class="pdf-links">
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_d079cfada46d4787a7d5f5440ca07017.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>利用規約 (JA)</a>
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_0da99cec3b6d44e49565abbee9508092.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Terms of Use (EN)</a>
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_de83d8da673b4d839b1da82a763f4fd9.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>同意書 (JA)</a>
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_06f7739cb9474384a329ed649080229e.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Consent Form (EN)</a>
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_d079cfada46d4787a7d5f5440ca07017.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          利用規約 (JA)
+        </a>
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_0da99cec3b6d44e49565abbee9508092.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Terms of Use (EN)
+        </a>
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_de83d8da673b4d839b1da82a763f4fd9.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          同意書 (JA)
+        </a>
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_06f7739cb9474384a329ed649080229e.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Consent Form (EN)
+        </a>
       </div>
     </div>
   </div>
+
+  <!-- STEP 2 -->
   <div class="step-card">
     <div class="step-number">02</div>
     <div class="step-body">
       <div class="step-label">Step Two</div>
-      <div class="step-title">Book Your Initial Consultation</div>
-      <div class="price-badge">&yen; 3,000 (tax incl.) / approx. 30 min</div>
-      <p class="step-desc">During the initial consultation, your therapist will listen to your concerns and goals in detail.<br>This session lets you assess your comfort with the therapist and decide how to proceed.<br>The consultation is conducted online via Zoom.</p>
-      <a class="cta-btn" href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87" target="_blank">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Book Initial Consultation
+      <div class="step-title">Submit Your Preferred Times</div>
+      <div class="price-badge">Initial Consultation — ¥ 3,000 (tax incl.) / approx. 30 min</div>
+      <p class="step-desc">
+        Please submit your 1st, 2nd, and 3rd preferred session times via the form below.<br>
+        Your therapist will review availability and arrange a schedule that works for you.<br>
+        Sessions are currently available approximately twice a week.
+      </p>
+      <a class="cta-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSc7ksZSYjFXfZsTuzKey1ICZi8XS70Y63VBq0-anXYmDNOoTw/viewform" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Submit Preferred Times
       </a>
     </div>
   </div>
+
+  <!-- STEP 3 -->
   <div class="step-card">
     <div class="step-number">03</div>
     <div class="step-body">
       <div class="step-label">Step Three</div>
-      <div class="step-title">Complete the Intake Form</div>
-      <p class="step-desc">After booking, please complete the intake form before your session.<br>The information you provide helps your therapist tailor a more effective session for you.<br>Please bring the completed form to your session, or send it by email in advance.</p>
-      <div class="pdf-links">
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_f10c47f2359e4e58ae749528b8652c0d.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>ヒアリングシート (JA)</a>
-        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_fe69122358144be98cb4f721780e9e13.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Intake Form (EN)</a>
+      <div class="step-title">Schedule Confirmation by Email</div>
+      <p class="step-desc">
+        Your therapist will review your preferred times and contact you by email to confirm the schedule.<br>
+        Please check your inbox (and spam folder) for the confirmation message.<br>
+        Feel free to reply to the email with any questions.
+      </p>
+      <div class="note-box">
+        📧 <strong>Confirmation email</strong>: Sent to the email address provided in your form submission.<br>
+        <em style="font-size:.82rem; color:rgba(90,138,106,.7)">Please allow 1–2 business days for a response.</em>
       </div>
     </div>
   </div>
+
+  <!-- STEP 4 -->
   <div class="step-card">
     <div class="step-number">04</div>
     <div class="step-body">
       <div class="step-label">Step Four</div>
-      <div class="step-title">Your Session Day</div>
-      <p class="step-desc">Join via Zoom at your scheduled time.<br>We recommend a quiet, comfortable space and the use of earphones.<br>Relax and feel free to speak openly &mdash; your sessions are a safe, confidential space.</p>
-      <div class="note-box">
-        💡 <strong>What to prepare</strong><br>
-        A quiet space &nbsp;/&nbsp; Stable Wi-Fi &nbsp;/&nbsp; Zoom app (free) &nbsp;/&nbsp; Earphones recommended<br>
-        <em style="font-size:.82rem;color:rgba(90,138,106,.7)">静かな場所 ／ 安定したWi-Fi ／ Zoomアプリ（無料） ／ イヤホン推奨</em>
+      <div class="step-title">Complete the Intake Form</div>
+      <p class="step-desc">
+        After booking, please complete the intake form before your session.<br>
+        The information you provide helps your therapist tailor a more effective session for you.<br>
+        Please bring the completed form to your session, or send it by email in advance.
+      </p>
+      <div class="pdf-links">
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_f10c47f2359e4e58ae749528b8652c0d.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          ヒアリングシート (JA)
+        </a>
+        <a class="pdf-link" href="https://64017ba2-7d70-45f6-aa95-e566970f86c5.usrfiles.com/ugd/64017b_fe69122358144be98cb4f721780e9e13.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Intake Form (EN)
+        </a>
       </div>
     </div>
   </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card">
+    <div class="step-number">05</div>
+    <div class="step-body">
+      <div class="step-label">Step Five</div>
+      <div class="step-title">Your Session Day</div>
+      <p class="step-desc">
+        Join via Zoom at your scheduled time.<br>
+        We recommend a quiet, comfortable space and the use of earphones.<br>
+        Relax and feel free to speak openly — your sessions are a safe, confidential space.
+      </p>
+      <div class="note-box">
+        💡 <strong>What to prepare</strong><br>
+        A quiet space &nbsp;/&nbsp; Stable Wi-Fi &nbsp;/&nbsp; Zoom app (free) &nbsp;/&nbsp; Earphones recommended<br>
+        <em style="font-size:.82rem; color:rgba(90,138,106,.7)">静かな場所 ／ 安定したWi-Fi ／ Zoomアプリ（無料） ／ イヤホン推奨</em>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<!-- CTA SECTION -->
 <section class="cta-section">
-  <div class="cta-bg"></div><div class="cta-overlay"></div>
+  <div class="cta-bg"></div>
+  <div class="cta-overlay"></div>
   <div class="cta-content">
     <span class="cta-label">Ready to begin?</span>
-    <h2>Book Your First Consultation</h2>
-    <span class="cta-price-note">&yen; 3,000 / approx. 30 min via Zoom</span>
-    <p>Start with an initial consultation to share your concerns<br>and find out if this therapy is right for you.</p>
-    <a class="btn btn--outline-light" href="https://inquiry041.wixsite.com/my-site/booking-calendar/%E5%88%9D%E5%9B%9E%E7%9B%B8%E8%AB%87" target="_blank">Book Now</a>
+    <h2>Submit Your Preferred Times</h2>
+    <span class="cta-price-note">Initial Consultation — ¥ 3,000 / approx. 30 min via Zoom</span>
+    <p>Submit your 1st–3rd preferred times via the form below.<br>Your therapist will confirm your schedule by email.</p>
+    <a class="btn btn--outline-light" href="https://docs.google.com/forms/d/e/1FAIpQLSc7ksZSYjFXfZsTuzKey1ICZi8XS70Y63VBq0-anXYmDNOoTw/viewform" target="_blank">
+      Go to Request Form
+    </a>
   </div>
 </section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Healing <span>&amp;</span> Hypnotherapy</div>
+  <div class="footer-logo">Healing <span>&</span> Hypnotherapy</div>
   <ul class="footer-links">
     <li><a href="https://www.healinghypno-online.info/en/#about">What is Therapy</a></li>
     <li><a href="https://www.healinghypno-online.info/en/#services">Services</a></li>
@@ -156,7 +450,8 @@
     <li><a href="https://fluentmind350.github.io/healing-hypno-booking/en.html">How to Book</a></li>
     <li><a href="mailto:admin@healinghypno-online.info">Contact</a></li>
   </ul>
-  <p class="footer-copy">&copy; 2025 Healing Hypno Online &mdash; Online Hypnotherapy Counseling</p>
+  <p class="footer-copy">© 2025 Healing Hypno Online — Online Hypnotherapy Counseling</p>
 </footer>
+
 </body>
 </html>
